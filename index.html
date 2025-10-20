@@ -1,26 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Tonalpohualli</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tonalpouali Model</title>
+    
     <style>
-        body { font-family: sans-serif; background-color: #222; color: #eee; padding: 2em; }
-        #resultado { background-color: #333; padding: 1em; border-radius: 5px; white-space: pre-wrap; }
-        input { margin-right: 0.5em; }
+      body {
+        margin: 0;
+        overflow: hidden; /* Evita las barras de scroll */
+      }
+      canvas {
+        display: block;
+      }
+      #marker {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 32px;
+        color: white;
+        z-index: 10;
+      }
+      #controls {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+      }
+      button {
+        font-size: 16px;
+        padding: 8px 16px;
+        margin: 0 10px;
+      }
     </style>
-</head>
-<body>
-    <h1>Nexo Tonalpouali - Calculadora</h1>
-    <p>Selecciona una fecha y hora para calcular su Tonal.</p>
-    
-    <input type="date" id="fechaInput">
-    <input type="time" id="horaInput">
-    <button id="calcularBtn">Calcular</button>
-    
-    <h2>Resultado:</h2>
-    <pre id="resultado"></pre>
-
-    <script type="module" src="./src/main.ts"></script>
-</body>
+  </head>
+  <body>
+    <div id="marker">▼</div>
+    <div id="controls">
+      <button id="prevBtn">‹ Anterior</button>
+      <button id="nextBtn">Siguiente ›</button>
+    </div>
+    <script type="module" src="/src/experimento_03.ts"></script>
+  </body>
 </html>

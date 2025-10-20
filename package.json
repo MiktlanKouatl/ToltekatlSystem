@@ -12,7 +12,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/three": "^0.180.0",
     "typescript": "^5.9.2",
     "vite": "^7.1.6"
+  },
+  "dependencies": {
+    "astronomy-engine": "^2.0.4",
+    "date-fns": "^4.1.0",
+    "gsap": "^3.13.0",
+    "three": "^0.180.0",
+    "troika-three-text": "^0.52.4"
   }
 }
