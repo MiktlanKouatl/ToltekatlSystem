@@ -57,4 +57,21 @@ export class TonalRing {
         geometry.setIndex(indices);
         return geometry;
     }
+
+    public getTonalPosition(tonalIndex: number): THREE.Vector3 {
+        // Asumimos 20 tonales distribuidos equitativamente en un círculo de radio 5.
+        const angle = (tonalIndex / 20) * Math.PI * 2;
+        const radius = 5;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        
+        // Creamos el vector de posición local
+        const localPosition = new THREE.Vector3(x, y, 0);
+        
+        // Aseguramos que la matriz mundial del mesh esté actualizada
+        this.mesh.updateWorldMatrix(true, false);
+        
+        // Transformamos la posición local a coordenadas mundiales
+        return localPosition.applyMatrix4(this.mesh.matrixWorld);
+    }
 }

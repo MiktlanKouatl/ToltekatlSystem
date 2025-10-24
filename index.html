@@ -1,47 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tonalpouali Model</title>
-    
-    <style>
-      body {
-        margin: 0;
-        overflow: hidden; /* Evita las barras de scroll */
-      }
-      canvas {
-        display: block;
-      }
-      #marker {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 32px;
-        color: white;
-        z-index: 10;
-      }
-      #controls {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 10;
-      }
-      button {
-        font-size: 16px;
-        padding: 8px 16px;
-        margin: 0 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="marker">▼</div>
-    <div id="controls">
-      <button id="prevBtn">‹ Anterior</button>
-      <button id="nextBtn">Siguiente ›</button>
+    <title>Semanauak Yolotl - El Corazón del Universo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div id="info">
+        <div id="readout">Calibrando máquina...</div>
     </div>
-    <script type="module" src="/src/experimento_03.ts"></script>
-  </body>
+
+    <div id="control-panel">
+        <div class="control-group"><button id="play-btn">Play</button><button id="stop-btn" disabled>Stop</button></div>
+        <div class="control-group"><span>Momento</span><button id="prev-momento-btn">-</button><button id="next-momento-btn">+</button></div>
+        <div class="control-group"><span>Tonal</span><button id="prev-tonal-btn">-</button><button id="next-tonal-btn">+</button></div>
+        <div class="control-group"><span>Trecena</span><button id="prev-trecena-btn">-</button><button id="next-trecena-btn">+</button></div>
+        <div class="control-group"><span>Veintena</span><button id="prev-veintena-btn">-</button><button id="next-veintena-btn">+</button></div>
+        <div class="control-group"><span>Tonalpohualli</span><button id="prev-tonalpohualli-btn">-</button><button id="next-tonalpohualli-btn">+</button></div>
+        <div class="control-group"><span>Año</span><button id="prev-xiuhpohualli-btn">-</button><button id="next-xiuhpohualli-btn">+</button></div>
+        <div class="control-group"><button id="toggle-matrix-btn">Ver Matriz</button></div>
+    </div>
+    </div>
+    
+    <script type="module" src="/main.js"></script>
+</body>
 </html>

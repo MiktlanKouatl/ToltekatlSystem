@@ -1,32 +1,17 @@
-// Definimos los tipos de datos para tener un código más limpio y seguro.
-export type TonalName =
-  | 'Sipaktli' | 'Ejekatl' | 'Kali' | 'Kuetspalin' | 'Kouatl'
-  | 'Mikistli' | 'Masatl' | 'Tochtli' | 'Atl' | 'Itskuintli'
-  | 'Osomatli' | 'Malinali' | 'Akatl' | 'Oselotl' | 'Kuautli'
-  | 'Koskakuautli' | 'Olin' | 'Tekpatl' | 'Kiauitl' | 'Xochitl';
-
-// Interfaz para la estructura de datos de cada Tonal
-export interface ITonal {
-  name: TonalName;
-  configuration: string; // Ej: 'kali kali'
-}
-
-// Los cuatro elementos fundamentales.
-export type YearBearerName = 'Tochtli' | 'Akatl' | 'Tekpatl' | 'Kali';
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.YEAR_BEARER_START_TIMES = exports.TONALES = exports.VEINTENA_NAMES = exports.YEAR_BEARERS = void 0;
 // Basado en que el año 0 es Tochtli, esta es nuestra secuencia de portadores.
-export const YEAR_BEARERS: YearBearerName[] = ['Tochtli', 'Akatl', 'Tekpatl', 'Kali'];
-
+exports.YEAR_BEARERS = ['Tochtli', 'Akatl', 'Tekpatl', 'Kali'];
 // Nombres de las 18 Veintenas.
-export const VEINTENA_NAMES: string[] = [
-  "Atlakaualo", "Tlakaxipeualistli", "Tosostontli", "Uei Tosostli", "Toxkatl", 
-  "Etsakualistli", "Tekuiluitontli", "Uei Tekuiluitl", "Tlaxochimako", 
-  "Xokotl Uetsi", "Ochpanistli", "Teotleko", "Tepeiluitl", "Kecholi", 
-  "Panketsalistli", "Atemostli", "Tititl", "Iskali"
+exports.VEINTENA_NAMES = [
+    "Atlakaualo", "Tlakaxipeualistli", "Tosostontli", "Uei Tosostli", "Toxkatl",
+    "Etsakualistli", "Tekuiluitontli", "Uei Tekuiluitl", "Tlaxochimako",
+    "Xokotl Uetsi", "Ochpanistli", "Teotleko", "Tepeiluitl", "Kecholi",
+    "Panketsalistli", "Atemostli", "Tititl", "Iskali"
 ];
-
 // Guardamos los 20 tonales en orden.
-export const TONALES: ITonal[] = [
+exports.TONALES = [
     { name: 'Sipaktli', configuration: 'kali kali' },
     { name: 'Ejekatl', configuration: 'placeholder' },
     { name: 'Kali', configuration: 'placeholder' },
@@ -48,11 +33,10 @@ export const TONALES: ITonal[] = [
     { name: 'Kiauitl', configuration: 'placeholder' },
     { name: 'Xochitl', configuration: 'placeholder' }
 ];
-
 // Tiempos de inicio de cada portador de año en un ciclo de 52 años.
-export const YEAR_BEARER_START_TIMES: { [key in YearBearerName]: number } = {
-    'Tochtli': 6 + 45 / 60,    // 06:45
-    'Akatl': 12 + 45 / 60,   // 12:45
-    'Tekpatl': 18 + 45 / 60,   // 18:45
-    'Kali': 0 + 45 / 60,      // 00:45
+exports.YEAR_BEARER_START_TIMES = {
+    'Tochtli': 6 + 45 / 60, // 06:45
+    'Akatl': 12 + 45 / 60, // 12:45
+    'Tekpatl': 18 + 45 / 60, // 18:45
+    'Kali': 0 + 45 / 60, // 00:45
 };
