@@ -26,7 +26,7 @@ const LAYOUT_CONFIG = {
     ORDER: ['momentos', 'numeral', 'tonal', 'tonalpohualli', 'xiuhpohualli', 'xiuhmolpilli'],
     DEFINITIONS: {
         momentos:      { class: AnilloMomentos,      tubeWidth: 0.2 },
-        numeral:       { class: AnilloNumeral,       tubeWidth: 0.9 },
+        numeral:       { class: AnilloNumeral,       tubeWidth: 0.4 },
         tonal:         { class: AnilloTonal,         tubeWidth: 1.0 },
         tonalpohualli: { class: AnilloTonalpohualli, tubeWidth: 0.6 },
         xiuhpohualli:  { class: AnilloXiuhpohualli,  tubeWidth: 0.0 },

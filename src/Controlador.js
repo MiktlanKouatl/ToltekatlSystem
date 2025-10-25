@@ -7,11 +7,13 @@ export class Controlador {
      * @param {SemanauakYolotl} corazon - Instancia del motor de tiempo.
      * @param {Artefacto} artefacto - Instancia del motor de cálculo.
      * @param {ArtefactoVisual} vista - Instancia de la vista principal para acceder a los anillos.
+     * @param {AnclaGregoriana} ancla - Instancia del ancla gregoriana.
      */
-    constructor(corazon, artefacto, vista) {
+    constructor(corazon, artefacto, vista, ancla) { // <-- Recibir el ancla
         this.corazon = corazon;
         this.artefacto = artefacto;
         this.vista = vista;
+        this.ancla = ancla; // <-- Guardar el ancla
         this.playBtn = document.getElementById('play-btn');
         this.stopBtn = document.getElementById('stop-btn');
 
@@ -20,6 +22,52 @@ export class Controlador {
     }
 
     asignarControles() {
+        // --- NUEVO BOTÓN DE SINCRONIZACIÓN ---
+        const syncBtn = document.createElement('button');
+        syncBtn.id = 'sync-btn';
+        syncBtn.textContent = 'Sincronizar Hoy';
+        document.querySelector('.control-group').prepend(syncBtn); // Añadirlo al primer grupo
+
+        syncBtn.addEventListener('click', () => {
+            console.log("Sincronizando con la fecha y hora actuales...");
+            // const hoy = new Date(); // Old: Local timezone date
+            const now = new Date();
+            // Create a UTC Date object from the local date components
+            const hoyUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds()));
+            // const momentoDeHoy = this.ancla.gregorianoAMomento(hoy); // Old: Using local date
+            const momentoDeHoy = this.ancla.gregorianoAMomento(hoyUTC); // New: Using UTC date
+            this.corazon.momentoAbsoluto = momentoDeHoy;
+            this.corazon.dispatchEvent({ type: 'pulso' });
+        });
+
+        // --- BÚSQUEDA POR FECHA ---
+        const searchInput = document.getElementById('date-search-input');
+        const searchBtn = document.getElementById('date-search-btn');
+
+        searchBtn.addEventListener('click', () => {
+            const dateString = searchInput.value;
+            if (!dateString) {
+                console.log("Por favor, selecciona una fecha y hora.");
+                return;
+            }
+
+            console.log(`Buscando la fecha: ${dateString}`);
+            // const fechaBuscada = new Date(dateString); // Old: Parses in local timezone
+            // To ensure UTC, we need to parse the string and construct a UTC date.
+            // Assuming dateString format is YYYY-MM-DDTHH:mm (from datetime-local input)
+            const [datePart, timePart] = dateString.split('T');
+            const [year, month, day] = datePart.split('-').map(Number);
+            const [hours, minutes] = timePart.split(':').map(Number);
+            
+            const fechaBuscadaUTC = new Date(Date.UTC(year, month - 1, day, hours, minutes)); // month is 0-indexed
+            const momentoBuscado = this.ancla.gregorianoAMomento(fechaBuscadaUTC); // New: Using UTC date
+            
+            this.corazon.stop(); // Detener la animación para saltar a la fecha
+            this.corazon.momentoAbsoluto = momentoBuscado;
+            this.corazon.dispatchEvent({ type: 'pulso' });
+            this.actualizarBotones(); // Actualizar estado de botones play/stop
+        });
+
         // Controles de animación
         this.playBtn.addEventListener('click', () => {
             this.corazon.play();

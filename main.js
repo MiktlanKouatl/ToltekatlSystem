@@ -2,6 +2,7 @@ import { SemanauakYolotl } from './SemanauakYolotl.js';
 import { Artefacto } from './Artefacto.js';
 import { ArtefactoVisual } from './src/ArtefactoVisual.js';
 import { Controlador } from './src/Controlador.js';
+import { AnclaGregoriana } from './AnclaGregoriana.js'; // <-- IMPORTAR
 
 /**
  * =======================================================================
@@ -18,20 +19,15 @@ import { Controlador } from './src/Controlador.js';
  * =======================================================================
  */
 
-// --- 1. INICIALIZACIÓN DE MÓDULOS ---
-
-// El Modelo: La lógica pura del tiempo y el calendario.
+// --- INICIALIZACIÓN ---
 const corazon = new SemanauakYolotl();
 const artefacto = new Artefacto();
-
-// La Vista: El gestor de toda la representación visual en Three.js.
 const vista = new ArtefactoVisual();
+const ancla = new AnclaGregoriana(); // <-- CREAR EL ANCLA
+const controlador = new Controlador(corazon, artefacto, vista, ancla); // <-- Pasar el ancla al controlador
 
-// El Controlador: El gestor de la interacción del usuario con los botones.
-const controlador = new Controlador(corazon, artefacto, vista);
 
-
-// --- 2. CONEXIÓN PRINCIPAL (MODELO -> VISTA) ---
+// --- CONEXIÓN PRINCIPAL (MODELO -> VISTA) ---
 
 const infoPanel = document.getElementById('readout');
 
@@ -52,11 +48,12 @@ corazon.addEventListener('pulso', () => {
         <b>TONALPOHUALLI:</b> ${artefacto.getTonalpohualliCount()} / 260<hr>
         <b>VEINTENA:</b> ${artefacto.getVeintenaDisplay()}<br>
         <b>XIUHPOHUALLI:</b> ${artefacto.getAnioDisplay()}<br>
+        <b>DÍA DEL XIUHPOHUALLI:</b> ${estadoActual.diaDelAnio + 1} / 365<br>
     `;
 });
 
 
-// --- 3. INICIO DE LA SIMULACIÓN ---
+// --- INICIO DE LA SIMULACIÓN ---
 
 // Inicia el bucle de animación, pasándole el corazón para que lata en cada cuadro.
 vista.iniciarAnimacion(corazon);

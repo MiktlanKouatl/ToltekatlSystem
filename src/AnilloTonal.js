@@ -24,7 +24,7 @@ export class AnilloTonal extends Anillo {
      * Crea el anillo base con las 4 zonas de color (Negro, Rojo, Blanco, Azul).
      */
     crearBase() {
-        const geometria = new THREE.TorusGeometry(this.radio, this.tubeWidth, 4, 40);
+        const geometria = new THREE.TorusGeometry(this.radio, this.tubeWidth, 2, 40);
         
         const colors = [
             ...Array(5).fill(NEGRO),  // Zona 1
@@ -80,9 +80,9 @@ export class AnilloTonal extends Anillo {
 
             // Posicionamos en el perímetro, comenzando desde el offset y avanzando en sentido horario.
             const angulo = anguloOffset - (i / 20) * Math.PI * 2;
-            glifoGrupo.position.x = Math.cos(angulo) * (this.radio - this.tubeWidth / 2);
-            glifoGrupo.position.y = Math.sin(angulo) * (this.radio - this.tubeWidth / 2);
-            glifoGrupo.position.z = 1.4; // Por encima del anillo base
+            glifoGrupo.position.x = Math.cos(angulo) * (this.radio - this.tubeWidth * 0.2);
+            glifoGrupo.position.y = Math.sin(angulo) * (this.radio - this.tubeWidth * 0.2);
+            glifoGrupo.position.z = 0.5; // Por encima del anillo base
 
             this.add(glifoGrupo);
             this.glifos.push(glifoGrupo);

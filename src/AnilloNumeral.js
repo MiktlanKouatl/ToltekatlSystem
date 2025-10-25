@@ -39,19 +39,19 @@ export class AnilloNumeral extends Anillo {
         const bars = Math.floor(number / 5);
         const dots = number % 5;
 
-        const barWidth = this.tubeWidth * 0.8;
+        const barWidth = this.tubeWidth * 1.8;
         const barHeight = barWidth * 0.15;
-        const dotRadius = barHeight / 2;
-        const spacing = barHeight * 0.8;
+        const dotRadius = barHeight * 0.8;
+        const spacing = barHeight * 0.4;
 
-        let currentY = 0;
+        let currentY = -0.2;
 
         // Crear y posicionar barras desde abajo hacia arriba
         for (let i = 0; i < bars; i++) {
             const barGeo = new THREE.PlaneGeometry(barWidth, barHeight);
             const barMesh = new THREE.Mesh(barGeo, material);
-            barMesh.position.y = currentY + (barHeight / 2);
-            barMesh.position.z = 0.01; // Ligeramente por encima del plano
+            barMesh.position.y = currentY;
+            barMesh.position.z = 0.15; // Ligeramente por encima del plano
             simboloGrupo.add(barMesh);
             currentY += barHeight + spacing;
         }
@@ -62,10 +62,11 @@ export class AnilloNumeral extends Anillo {
             let currentX = -(dotTotalWidth / 2) + dotRadius;
 
             for (let i = 0; i < dots; i++) {
-                const dotGeo = new THREE.CircleGeometry(dotRadius, 4);
+                const dotGeo = new THREE.CircleGeometry(dotRadius, 8);
                 const dotMesh = new THREE.Mesh(dotGeo, material);
                 dotMesh.position.x = currentX;
                 dotMesh.position.y = currentY + dotRadius;
+                dotMesh.position.z = 0.15; // Ligeramente por encima del plano
                 simboloGrupo.add(dotMesh);
                 currentX += (dotRadius * 2) + spacing;
             }
