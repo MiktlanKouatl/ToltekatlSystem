@@ -17,7 +17,7 @@
     "vite": "^7.1.6"
   },
   "dependencies": {
-    "astronomy-engine": "^2.0.4",
+    "astronomy-engine": "^2.1.19",
     "date-fns": "^4.1.0",
     "gsap": "^3.13.0",
     "three": "^0.180.0",

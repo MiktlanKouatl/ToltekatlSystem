@@ -100,6 +100,13 @@ export class ArtefactoVisual {
     }
 
     crearAnillos() {
+        // --- INICIO: AÑADIR EL MARCADOR DE LA TIERRA ---
+        const marcadorGeo = new THREE.SphereGeometry(0.5, 16, 16);
+        const marcadorMat = new THREE.MeshBasicMaterial({ color: 0x00FFFF, wireframe: true });
+        this.marcadorTierra = new THREE.Mesh(marcadorGeo, marcadorMat);
+        this.scene.add(this.marcadorTierra);
+        // --- FIN: AÑADIR EL MARCADOR DE LA TIERRA ---
+
         let nextInnerRadius = LAYOUT_CONFIG.INNER_RADIUS;
 
         for (const ringName of LAYOUT_CONFIG.ORDER) {
@@ -139,6 +146,27 @@ export class ArtefactoVisual {
             anillo.actualizar(estado);
         }
     }
+
+    // --- INICIO: MÉTODO PARA ACTUALIZAR EL MARCADOR ---
+    actualizarMarcadorTierra(anguloOrbital) {
+        if (!this.marcadorTierra) return;
+        
+        // Asumimos un radio donde queremos que orbite el marcador
+        const radio = 15; // Puedes ajustar este valor
+        const DEGREES_TO_RADIANS = Math.PI / 180;
+        
+        // Alineamos con el puntero (90 grados, que es hacia arriba en un círculo trigonométrico 2D) y restamos el ángulo
+        // para que 0 grados (equinoccio vernal) esté en la posición de las 3 en punto y avance en sentido antihorario.
+        // Si el puntero visual está en otra posición (ej. 12 en punto), este cálculo necesitará ajuste.
+        // Asumiendo que 0° de longitud eclíptica (vernal) debe estar a la derecha (eje X positivo), el ángulo es directo.
+        // La conversión de longitud a ángulo de rotación en Three.js puede ser directa o necesitar un offset.
+        // Longitud 0° = (1, 0). Longitud 90° = (0, 1).
+        const anguloRad = anguloOrbital * DEGREES_TO_RADIANS;
+        
+        this.marcadorTierra.position.x = Math.cos(anguloRad) * radio;
+        this.marcadorTierra.position.y = Math.sin(anguloRad) * radio;
+    }
+    // --- FIN: MÉTODO PARA ACTUALIZAR EL MARCADOR ---
 
     iniciarAnimacion(corazon) {
         const animate = () => {
